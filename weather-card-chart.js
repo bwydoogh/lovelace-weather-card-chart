@@ -107,6 +107,7 @@ class WeatherCardChart extends Polymer.Element {
         }
         .card {
           padding: 0 18px 18px 18px;
+          padding-top: 2%;
         }
         .main {
           display: flex;
@@ -126,6 +127,9 @@ class WeatherCardChart extends Polymer.Element {
         }
         .main sup {
           font-size: 32px;
+        }
+        weather-card-chart.card-header {
+          display: none;
         }
 	.main .f70 {
 	  font-size: 70%;
