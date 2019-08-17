@@ -127,6 +127,9 @@ class WeatherCardChart extends Polymer.Element {
         .main sup {
           font-size: 32px;
         }
+	.main .f70 {
+	  font-size: 70%;
+	}
         .attributes {
           cursor: pointer;
           display: flex;
@@ -152,7 +155,7 @@ class WeatherCardChart extends Polymer.Element {
               <div on-click="_tempAttr">[[roundNumber(tempObj.state)]]<sup>[[getUnit('temperature')]]</sup></div>
             </template>
             <template is="dom-if" if="[[!tempObj]]">
-              <div on-click="_weatherAttr">[[roundNumber(weatherObj.attributes.temperature)]]<sup>[[getUnit('temperature')]]</sup></div>
+              <div on-click="_weatherAttr">[[roundNumber(forecastTemperature)]]<sup>[[getUnit('temperature')]]</sup>&nbsp;<span class="f70">[[forecastPrecipitation]] mm</span></div>
             </template>
           </div>
           <div class="attributes" on-click="_weatherAttr">
@@ -238,6 +241,8 @@ class WeatherCardChart extends Polymer.Element {
     this._hass = hass;
     this.lang = this._hass.selectedLanguage || this._hass.language;
     this.weatherObj = this.config.weather in hass.states ? hass.states[this.config.weather] : null;
+    this.forecastTemperature   = this.weatherObj.attributes.forecast[0].temperature;
+    this.forecastPrecipitation = this.weatherObj.attributes.forecast[0].precipitation; 	  
     this.sunObj = 'sun.sun' in hass.states ? hass.states['sun.sun'] : null;
     this.tempObj = this.config.temp in hass.states ? hass.states[this.config.temp] : null;
     this.forecast = this.weatherObj.attributes.forecast.slice(0,9);
